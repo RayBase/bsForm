@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="//cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+		
+		<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+		<script src="js/jquery.validate.min.js"></script>
+		<script src="js/jquery.cityselect.js"></script>
+		<script src="js/bs.form.js"></script>
+		<style>
+			.error{
+				color:#f00;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="http://www.admin03.com" method="post" id="vForm">
+			姓名:<input type="text" name="ly[name]"/><br />
+			电话:<input type="text" name="ly[phone]"/><br />
+			电子邮箱:<input type="text" name="ly[email]"/><br />
+			省:<select class="prov"></select>
+			市:<select class="city" disabled="disabled"></select>
+			区:<select class="dist" disabled="disabled"></select><br />
+			QQ:<input type="text" name="ly[qq]"/><br />
+			<input type="submit" name="dosubmit" />
+		</form>
+	</body>
+</html>
