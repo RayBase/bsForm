@@ -39,7 +39,7 @@ $(function() {
 		//省市区联动
 		$("#vForm").citySelect({
 			//省市区数据位置
-			url:"js/city.min.json"
+			url:"js/city.min.js"
 		});
 	})
 //同一个浏览器不得提交超过3次，依赖jquery-cookie
