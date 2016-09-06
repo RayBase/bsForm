@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="js/jquery.min.js"></script>
+	<script>
+	
+	</script>
+	<script>
+	//按照惯例，每次加载页面先运行一次
+	$(function(){
+		showMore("ajaxWrap");
+	})
+	//底部触发事件
+	$(window).scroll(function() {
+	    var dheight = $(document).height();
+	    var sheight = $(window).height()+$(document).scrollTop();
+	    if(dheight<=sheight){
+	    	//延迟2秒加载
+	    	setTimeout(function(){showMore("ajaxWrap");},2000);
+	    }
+	});
+	
+	//标识可以执行ajax
+	var moreshow=true;
+	//每页数目
+	var pageSize=6;
+	//当前页数
+	var page=1;
+	function showMore(id){
+		if(moreshow){
+			$.ajax({  
+				type:"POST",  
+				url:"/index.php?m=content&c=ajax_pages&a=ajax_pages", 
+				data:{'catid':{$catid},'page':page,'pagesize':pageSize},
+				dataType:'json',
+				success:function(json){
+					//JSON非空
+					if(json!=null){
+						$("#"+id).append(nextList(json.list));
+						page++;
+						if(json.last==true){
+							//list的last为true表示：这是最后一页，AJAX不允许再执行
+							moreshow=false;
+						}
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown) {
+					//console.log(XMLHttpRequest+","+textStatus+","+errorThrown);
+				},
+				complete: function(XMLHttpRequest, textStatus) {
+					//
+				}
+			});
+		}else{
+			//翻页到底的时候应该执行什么操作
+			//$('#get_more').html("已显示全部");
+		}
+	}
+	// 分解list的方法
+	function nextList(list){
+		var content = "";
+		var row = null;
+		//小于当前页的行数而且小于列表总长度继续执行，否则不执行
+		for(var i=0;i<list.length;i++){
+			
+			row=list[i];
+			content+='<li>';
+			//** 此处需要修改
+			content+='<a href="'+row['url']+'"><img src="'+row['thumb']+'" /><p>'+row['title']+'</p></a>';
+			
+			content+='</li>';
+		}
+		return content;
+	}
+	</script>
+	<body>
+		<div>
+			<ul id="ajaxWrap">
+				
+			</ul>
+		</div>
+	</body>
+</html>

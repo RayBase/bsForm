@@ -1,0 +1,309 @@
+@charset "utf-8";
+html {
+	font-size: 312.5%;
+	min-width: 6.4rem;
+}
+/*背景颜色*/
+.bg-red{ background-color: #e51400 !important;}
+.bg-darkRed{background-color: #c32136 !important;}
+.bg-green{ background-color: #60a917 !important;}
+.bg-blue{background-color:#44cef6 !important;}
+.bg-darkBlue{background-color: #16499a !important;}
+.bg-dark{background-color: #252525 !important;}
+.bg-amber{background-color: #ca6924 !important;}
+.bg-orange{background-color: #E56C19 !important;}
+.bg-grayDark{background-color: #696969 !important;}
+/*文本颜色*/
+.fg-red{color: #e51400 !important;}
+.fg-darkRed{color: #C32136 !important;}
+.fg-green{color: #60a917 !important;}
+.fg-blue{color:#44CEF6 !important;}
+.fg-darkBlue{color: #16499a !important;}
+.fg-white{color: #FFFFFF !important;}
+/*轮廓样式*/
+.ol-red{outline-color: #e51400 !important;}
+.ol-darkRed{outline-color: #C32136 !important;}
+.ol-green{outline-color: #60a917 !important;}
+.ol-blue{outline-color: #44CEF6 !important;}
+.ol-darkBlue{outline-color: #16499a !important;}
+.ol-orange{outline-color: #E56C19 !important;}
+/*边框颜色样式*/
+.bd-red{border-color: #e51400 !important;}
+.bd-darkRed{border-color: #c32136 !important;}
+.bd-green{border-color: #60a917 !important;}
+.bg-blue{border-color: #44CEF6 !important;}
+.bd-darkBlue{border-color: #16499a !important;}
+/*常用宽度*/
+.w-10{width: 10% !important;}
+.w-15{width: 15% !important;}
+.w-20{width: 20% !important;}
+.w-25{width: 25% !important;}
+.w-30{width: 30% !important;}
+.w-40{width: 40% !important;}
+.w-50{width: 50% !important;}
+.w-60{width: 60% !important;}
+.w-70{width: 70% !important;}
+.w-80{width: 80% !important;}
+.w-90{width: 90% !important;}
+.w-100{width: 100% !important;}
+
+@media screen and (min-width: 0px) {
+	/*表单控件*/
+	.form-wrap *{
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	.form-wrap{
+		width:400px;
+		padding:5px;
+	}
+	.form-wrap .form-row{
+		position: relative;
+		line-height: 38px;
+		float: left;
+		width:100%;
+	}
+	.form-wrap .form-col{
+		position: relative;
+		display: block;
+		line-height: 38px;
+		float: left;
+		width:30%;
+		font-size:20%;
+	}
+	.form-row .form-label{
+		display: block;
+		position: relative;
+		height:38px;
+		line-height: 38px;
+		text-align: right;
+		font-size: 16px;
+		cursor: pointer;
+		font-weight: bold;
+		color: #666666;
+		padding-right: 10px;
+		overflow: hidden;
+	}
+	.form-row .form-label b{
+		position: absolute;
+		top:5px;
+		right:7px;
+		color: #e51400;
+		line-height:10px;
+	}
+	.form-row .form-control{
+		height:28px;
+		line-height: 28px;
+		padding:0 5px;
+		border-radius: 3px;
+		border:1px solid #ccc;
+		font-size:16px;
+	}
+	.form-row .form-col .form-control{
+		width:96%;
+	}
+	.form-row .form-control:focus{
+		box-shadow:0px 0 3px #44cef6;
+	}
+	.form-wrap .form-btn{
+		border:1px solid #CCC;
+		background-color: #eee;
+		color: #333;
+		height: 30px;
+		line-height: 30px;
+		width:120px;
+		border-radius: 5px;
+		font-size: 15px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	.form-wrap .form-btn.form-submit{
+		border:1px solid #C32136;
+		background-color: #C32136;
+		color: #FFFFFF;
+	}
+	.form-wrap .form-btn.form-reset{
+		border:1px solid #CA6924;
+		background-color:#CA6924;
+		color: #FFFFFF;
+	}
+	.form-wrap .form-row .error{
+		border: 1px solid #E51400 !important;
+	}
+	.form-wrap .form-row span.error{
+		position: absolute;
+		color:#FFF;
+		text-align: center;
+		display: block;
+		border: 1px solid #e51400;
+		border-radius: 5px;
+		background-color: #e51400;
+		z-index: 10;
+		left: 5px;
+		padding:0 10px;
+		height:26px;
+		line-height: 24px;
+		font-size:14px;
+		font-weight: bold;
+	}
+	.form-wrap .form-row span.error:after{
+		content:"";
+		width:0; 
+		height:0; 
+		border-top:8px solid transparent;
+		border-bottom:8px solid transparent; 
+		border-left:8px solid #E51400;
+		display: block; 
+		position: absolute;
+		z-index: 11;
+		top: -4px;
+		left:-1px;
+	}
+	.form-wrap .form-tab span{
+		height: 30px;
+		line-height: 28px;
+		display: inline-block;
+		padding:0 5px;
+		margin-right: 5px;
+		border: 1px solid #CCC;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+	.form-wrap .form-tab span.active{
+		border-color: #C32136;
+		background-color: #C32136;
+		color: #FFF;
+	}
+	.form-wrap .form-tab span input[type="radio"]{
+		display: none;
+	}
+	.form-wrap .form-textarea{
+		margin-top: 5px;
+		height: 84px;
+	}
+	
+	/* 翻页组件 */
+	.pages-wrap{
+		width: 100%;
+		text-align: center;
+		height: 36px;
+		overflow: hidden;
+		font-size:100%;
+	}
+	.pages-wrap a{
+		color: #333;
+		display: inline-block;
+		height:30px;
+		line-height: 30px;
+		padding:0 8px;
+		border-radius: 3px;
+		border:1px solid #ccc;
+		font-size:16px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.pages-wrap a:hover{
+		background-color: #177cb0;
+		color: #FFFFFF;
+		border-color:#177CB0;
+	}
+	.pages-wrap span{
+		display: inline-block;
+		background-color: #177cb0;
+		color: #FFFFFF;
+		height:30px;
+		line-height: 30px;
+		padding:0 8px;
+		border-radius: 3px;
+		border:1px solid #177cb0;
+		font-size:16px;
+	}
+	
+	/* 浮动导航组件 */
+	.nav-wrap{
+		position: fixed;
+		width:100%;
+		overflow: hidden;
+		background-color: #00A1CB;
+	}
+	.nav{
+		width:1020px;
+		margin: 0 auto;
+	}
+	.nav-top{
+		top:0;
+	}
+	.nav-bottom{
+		bottom: 0;
+	}
+	.nav-wrap ul{
+		overflow: hidden;
+	}
+	.nav-wrap ul li{
+		float: left;
+		display: inline-block;
+		width:12%;
+		background-color: #177CB0;
+	}
+	.nav-wrap ul li a{
+		display: block;
+		font-size:24px;
+		height:40px;
+		line-height: 40px;
+		text-align: center;
+		color: #FFFFFF;
+	}
+}
+@media screen and (min-width: 320px) {
+	html {
+		font-size: 312.5%;
+	}
+	.order-wrap{
+		font-size:12px;
+	}
+	.order-wrap h4{
+		font-size:24px;
+		color: #FFFFFF;
+		height: 60px;
+		line-height: 60px;
+		text-indent: 10px;
+		background-color: #00A1CB;
+	}
+	.order-main{
+		width:100%;
+		float: left;
+	}
+	.order-comment{
+		width:100%;
+		float: left;
+	}
+}
+@media screen and (min-width: 360px) {
+	html {
+		font-size: 351.5%;
+	}
+}
+@media screen and (min-width: 410px) {
+	html {
+		font-size: 400%;
+	}
+}
+@media screen and (min-width: 480px) {
+	html {
+		font-size: 469%;
+	}
+}
+@media screen and (min-width: 640px) {
+	html {
+		font-size: 625%;
+	}
+	.order-main{
+		width:70%;
+	}
+	.order-comment{
+		width:30%;
+	}
+	
+}
