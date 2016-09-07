@@ -92,10 +92,11 @@ function addProducts(id,product,price,recommend){
 	var arrPrice = price.split(',');
 	var html = '';
 	for (var i = 0; i < arrProduct.length; i++){
+		//判断推荐位
 		if(i+1==recommend){
-			html += '<input id="'+id+i+'" type="radio" name="ly['+id+']" value="'+arrProduct[i]+'" /><label price="'+arrPrice[i]+'" for="'+id+i+'">'+arrProduct[i]+'<img class="recommend" src="images/hot.gif"/></label>';
+			html += '<input id="'+id+i+'" type="radio" name="ly['+id+']" value="'+arrProduct[i]+'" /><label onclick="selectProduct($(this))" price="'+arrPrice[i]+'" for="'+id+i+'">'+arrProduct[i]+'<img class="recommend" src="images/hot.gif"/></label>';
 		}else{
-			html += '<input id="'+id+i+'" type="radio" name="ly['+id+']" value="'+arrProduct[i]+'" /><label price="'+arrPrice[i]+'" for="'+id+i+'">'+arrProduct[i]+'</label>';
+			html += '<input id="'+id+i+'" type="radio" name="ly['+id+']" value="'+arrProduct[i]+'" /><label onclick="selectProduct($(this))" price="'+arrPrice[i]+'" for="'+id+i+'">'+arrProduct[i]+'</label>';
 		}
 	}
 	$("#"+id).append(html);
@@ -108,10 +109,54 @@ function addProducts(id,product,price,recommend){
 	$("#"+id).children("label:eq("+(recommend-1)+")").click();
 }
 //发货滚动
-function scrollComment(id,time){
+function scrollComment(id){
+	// 获得ul容器对象
 	var sWrap = $("#"+id).children("ul");
-	setInterval(run,time);
+	// 声明最后li元素
+	var liLast = null;
+	// 声明最后li 元素高度
+	var liHeight = 0;
+	setInterval(run,5000);
 	function run(){
-		sWrap.prepend(sWrap.children("li:last-child").hide().fadeIn("slow"));
+		// 循环获得当前容器里最后的 li 元素
+		liLast = sWrap.children("li:last-child");
+		// 获得最后 li 元素的高度
+		liHeight = liLast.css("height");
+		sWrap.animate(
+			{paddingTop:liHeight},
+			function(){
+				sWrap.css({"padding-top":"0px"})
+				.prepend(liLast.hide().fadeIn("slow"));
+			}
+		);
 	}
+}
+
+//计算总价功能
+//单价
+var proPrice = 0;
+//产品数量
+var proNumber = 1;
+//产品总价
+var totalPrice = 0;
+//选择产品后的改变
+function selectProduct(obj){
+	proPrice = obj.attr("price");
+	calculate();
+}
+function reduceNumber(){
+	if(proNumber>1){
+		proNumber-=1;
+		$("#form-number").val(proNumber);
+		calculate();
+	}
+}
+function plusNumber(){
+	proNumber+=1;
+	$("#form-number").val(proNumber);
+	calculate();
+}
+function calculate(){
+	totalPrice = proPrice*proNumber;
+	$("#form-price").val(totalPrice);
 }

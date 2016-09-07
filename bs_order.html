@@ -15,47 +15,6 @@
 		<script src="js/bs.form.js"></script> 
 		<link rel="stylesheet" href="css/base.css"/>
 		<link rel="stylesheet" href="css/bs.css" />
-		<script>
-			$(function(){
-				//动态增加产品，指定容器id，产品名称组，产品价格组，推荐产品的顺位数字
-				addProducts('product','产品1：大礼包,产品2：豪华大礼包,产品3：超值豪华大礼包','48,58,68','2');
-				
-				//id,name,V9获取的带逗号字段
-				addTabs('color','蓝色,酒红色,藏青色,蓝色+酒红色,酒红色+藏青色,蓝色+藏青色');
-				addTabs('size', '38,39,40,41,42');
-				//数量的公共变量
-				var number = 1;
-				var price = 0;
-				$("#form-number").val(number);
-				$("#form-reduce").click(function(){
-					if(number>1){
-						//自减之后赋值
-						number=number-1;
-						$("#form-number").val(number);
-						calculate();
-					}
-				});
-				$("#form-plus").click(function(){
-					number=number+1;
-					$("#form-number").val(number);
-					calculate();
-				});
-				
-				$("#product label").click(function(){
-					price=$(this).attr("price");
-					calculate();
-				});
-				
-				$("#product label.active").click();
-				
-				function calculate(){
-					$("#form-price").val(price*number);
-				}
-				
-				//滚动  容器id，毫秒数
-				scrollComment("comment-list",3000);
-			})
-		</script>
 	</head>
 	<body>
 		<div class="order-wrap">
@@ -69,44 +28,58 @@
 								<!-- 使用addProducts 方法添加 -->
 							</div>
 						</div>
-						
+						<script>
+							//动态增加产品，指定容器id，产品名称组，产品价格组，推荐产品的顺位数字
+							addProducts('product','产品1：大礼包,产品2：豪华大礼包,产品3：超值豪华大礼包','48,58,68','2');
+						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">颜色</label>
 							<div class="form-col form-tab w-70" id="color">
 								<!-- 使用addTabs 方法添加 -->
 							</div>
 						</div>
-
+						<script>
+							//id,name,V9获取的带逗号字段
+							addTabs('color','蓝色,酒红色,藏青色,蓝色+酒红色,酒红色+藏青色,蓝色+藏青色');
+						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">尺码</label>
 							<div class="form-col form-tab w-70" id="size">
 								<!-- 使用addTabs 方法添加 -->
 							</div>
 						</div>
-						
+						<script>
+							addTabs('size', '38,39,40,41,42');
+						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">数量</label>
 							<div class="form-col w-70">
-								<input type="button" class="form-control form-reduce" id="form-reduce" value="-" />
+								<input type="button" class="form-control form-reduce" id="form-reduce" onclick="reduceNumber()" value="-" />
 								<input class="form-control form-number" id="form-number" value="1" name="ly[price]" readonly="readonly">
-								<input type="button" class="form-control form-plus" id="form-plus" value="+" />
+								<input type="button" class="form-control form-plus" id="form-plus" onclick="plusNumber()" value="+" />
 							</div>
 						</div>
-						
+						<script>
+							//刷新重置
+							$("#form-number").val(proNumber);
+						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">价格</label>
 							<div class="form-col w-70">
 								<input type="text" class="form-control form-price w-25 max-80 min-40" id="form-price" value="" readonly="readonly"/><b class="font-mark fg-red f-20">￥</b>
 							</div>
 						</div>
-						
+						<script>
+							//刷新重置
+							$("#form-price").val(proPrice);
+						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80" for="name"><b>*</b>姓名</label>
 							<div class="form-col w-70">
 								<input class="form-control bd-green" type="text" id="name" name="ly[name]" placeholder="请输入您的姓名" />
 							</div>
 						</div>
-
+						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80"><b>*</b>电话</label>
 							<div class="form-col w-70">
@@ -200,6 +173,10 @@
 						</li>
 					</ul>
 				</div>
+				<script>
+					//滚动  容器id，毫秒数
+					scrollComment("comment-list");
+				</script>
 			</div>
 		</div>
 	</body>
