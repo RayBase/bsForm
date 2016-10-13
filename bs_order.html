@@ -9,32 +9,63 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta content="IE=edge" http-equiv="X-UA-Compatible">
 		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.cookie.js"></script>
-		<script src="js/jquery.validate.min.js"></script>
-		<script src="js/jquery.cityselect.js"></script>
+		<!--<script src="js/jquery.cookie.js"></script>-->
 		<script src="js/bs.form.js"></script> 
 		<link rel="stylesheet" href="css/base.css"/>
 		<link rel="stylesheet" href="css/bs.css" />
+		<script>
+			$(function(){
+				setParentFrameHeight();
+				setCommentHeight();
+			});
+			//浏览器大小改变事件
+			$(window).resize(function(){
+				setParentFrameHeight();
+				setCommentHeight();
+			});
+			function setParentFrameHeight(){
+				var orderHeight = $("#order-wrap").css("height");
+				$("#order-iframe",parent.document).attr("height",orderHeight);
+			}
+			//设置发货通知的高度和左边的订单高度一致
+			function setCommentHeight(){
+				var commentHeight = $(".order-main").css("height");
+				$(".order-comment").css("height",commentHeight);
+			}
+		</script>
 	</head>
 	<body>
-		<div class="order-wrap">
+		<!--
+        	作者：himax@qq.com
+        	时间：2016-10-02
+        	描述：表单组件示范
+        -->
+		<div class="order-wrap" id="order-wrap">
 			<div class="order-main">
-				<h4>邦盛表单系统</h4>
+				<h4><i class="iconfont">&#xe600;</i> 邦盛订单系统</h4>
 				<div class="form-wrap w-100">
-					<form action="http://www.admin03.com" method="post" id="vForm">
+					<form action="http://www.admin03.com" method="post" onsubmit="return validateForm($(this))" onchange="validateForm($(this))">
+						<div class="form-row">
+							<label class="form-col form-label w-15 min-80">普通信息</label>
+							<div class="form-col w-70">
+								<b class="font-mark">普通信息</b>
+								<i class="font-mark">普通信息</i>
+								<del class="font-mark">普通信息</del>
+							</div>
+						</div>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">产品</label>
-							<div class="form-col form-tab w-70" id="product">
+							<div class="form-col form-tab w-70" id="subject">
 								<!-- 使用addProducts 方法添加 -->
 							</div>
 						</div>
 						<script>
-							//动态增加产品，指定容器id，产品名称组，产品价格组，推荐产品的顺位数字
-							addProducts('product','产品1：大礼包,产品2：豪华大礼包,产品3：超值豪华大礼包','48,58,68','2');
+							//动态增加产品，指定容器id，产品名称组，产品价格组，推荐产品的顺位数字(0表示无推荐)，绑定计算事件
+							addProducts('subject','产品1：大礼包,产品2：豪华大礼包,产品3：超值豪华大礼包','50,60,70',3);
 						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">颜色</label>
-							<div class="form-col form-tab w-70" id="color">
+							<div class="form-col form-tab orange w-70" id="color">
 								<!-- 使用addTabs 方法添加 -->
 							</div>
 						</div>
@@ -44,24 +75,27 @@
 						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">尺码</label>
-							<div class="form-col form-tab w-70" id="size">
+							<div class="form-col form-tab green w-70" id="size">
 								<!-- 使用addTabs 方法添加 -->
 							</div>
 						</div>
 						<script>
 							addTabs('size', '38,39,40,41,42');
 						</script>
+						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">数量</label>
 							<div class="form-col w-70">
 								<input type="button" class="form-control form-reduce" id="form-reduce" onclick="reduceNumber()" value="-" />
-								<input class="form-control form-number" id="form-number" value="1" name="ly[price]" readonly="readonly">
+								<input class="form-control form-number" id="form-number" value="1" name="pay[price]" readonly="readonly" />
 								<input type="button" class="form-control form-plus" id="form-plus" onclick="plusNumber()" value="+" />
 							</div>
 						</div>
 						<script>
-							//刷新重置
+							//刷新重置产品数量
 							$("#form-number").val(proNumber);
+							//开启批发优惠('{$wholesale}','{$wholenumber}',{$wholestatus})
+							openWholesale('9,12,20','10,20,30',0);
 						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">价格</label>
@@ -70,63 +104,133 @@
 							</div>
 						</div>
 						<script>
-							//刷新重置
+							//刷新重置产品价格
 							$("#form-price").val(proPrice);
+						</script>
+						
+						<div class="form-row">
+							<label class="form-col form-label w-15 min-80">扩展费用</label>
+							<div id="extra" class="form-col form-tab blue w-70">
+								
+							</div>
+						</div>
+						<script>
+							addExtra('extra','普通包装（免费）,精美礼盒包装（成本价25元）,普通包装+偏远地区邮费（20元）,精美礼盒包装+偏远地区邮费（45元）','0,25,20,45');
 						</script>
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80" for="name"><b>*</b>姓名</label>
 							<div class="form-col w-70">
-								<input class="form-control bd-green" type="text" id="name" name="ly[name]" placeholder="请输入您的姓名" />
+								<input class="form-control bd-green bs-valid" type="text" id="name" name="pay[name]" placeholder="请输入您的姓名" reg="/^\S+$/" errmess="姓名填写错误" />
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80"><b>*</b>电话</label>
 							<div class="form-col w-70">
-								<input class="form-control bd-darkBlue" type="text" name="ly[phone]" placeholder="请输入您的电话" />
+								<input class="form-control bd-darkBlue bs-valid" type="text" name="pay[phone]" placeholder="请输入您的电话" reg="/^1[0-9]{2}\d{8}$/" errmess="电话填写错误" />
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">QQ</label>
 							<div class="form-col w-70">
-								<input class="form-control" type="text" name="ly[qq]" placeholder="请输入您的QQ" />
+								<input class="form-control" type="text" name="pay[qq]" placeholder="请输入您的QQ" />
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">电子邮箱</label>
 							<div class="form-col w-70">
-								<input class="form-control" type="text" name="ly[email]" placeholder="请输入您的E-mail" />
+								<input class="form-control" type="text" name="pay[email]" placeholder="请输入您的E-mail" />
 							</div>
 						</div>
 
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">地区</label>
 							<div class="form-col w-25">
-								<select class="form-control prov w-80" name="ly[prov]"></select><span class="font-mark">省</span>
+								<select class="form-control w-80 bs-valid" name="pay[prov]" reg="/^\S+$/" errmess="省份必须选择"></select>
 							</div>
 							<div class="form-col w-25">
-								<select class="form-control city w-80" name="ly[city]" disabled="disabled"></select><span class="font-mark">市</span>
+								<select class="form-control w-80 bs-valid" name="pay[city]" reg="/^\S+$/" errmess="城市必须选择"></select>
 							</div>
 							<div class="form-col w-25">
-								<select class="form-control dist w-80" name="ly[dist]" disabled="disabled"></select><span class="font-mark">区</span>
+								<select class="form-control w-80 bs-valid" name="pay[dist]" reg="/^\S+$/" errmess="地区必须选择"></select>
+							</div>
+						</div>
+						<script src="js/PCASClass.js"></script>
+						<script>
+							new PCAS("pay[prov]","pay[city]","pay[dist]");
+						</script>
+						
+						<div class="form-row">
+							<label class="form-col form-label w-15 min-80">详细地址</label>
+							<div class="form-col w-70">
+								<textarea class="form-control form-textarea" name="pay[address]" placeholder="请填写您的详细地址"></textarea>
+							</div>
+						</div>
+						<script>
+							bindAddress();
+						</script>
+						
+						<div class="form-row">
+							<label class="form-col form-label w-15 min-80">付款方式</label>
+							<div class="form-col form-tab w-70">
+								<input id="payment0" name="pay[pay_type]" value="货到付款" type="radio" price="10" onclick="selectDiscount($(this));" />
+								<label class="active" for="payment0"><i class="iconfont">&#xe601;</i> 货到付款</label>
+								<input id="payment1" name="pay[pay_type]" value="支付宝" type="radio" price="9.5" onclick="selectDiscount($(this));" />
+								<label for="payment1"><i class="iconfont">&#xe602;</i> 支付宝</label>
+								<input id="payment2" name="pay[pay_type]" value="微信支付" type="radio" price="9.5" onclick="selectDiscount($(this));" />
+								<label for="payment2"><i class="iconfont">&#xe603;</i> 微信支付</label>
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<label class="form-col form-label w-15 min-80">留言内容</label>
 							<div class="form-col w-70">
-								<textarea class="form-control form-textarea" name="ly[content]" placeholder="请输入您的留言"></textarea>
+								<textarea class="form-control form-textarea" name="pay[content]" placeholder="请输入您的留言"></textarea>
 							</div>
 						</div>
+						
+						<div class="form-row">
+							<label class="form-col form-label w-15 min-80">出生日期</label>
+							<div class="form-col w-70">
+								<input class="form-control w-20 min-100" id="form-date" type="date" name="pay[date]" readonly="readonly" placeholder="选择日期" />
+							</div>
+						</div>
+						<link href="css/mobiscroll.css" rel="stylesheet" />
+						<link href="css/mobiscroll_date.css" rel="stylesheet" />
+						<script src="js/mobiscroll_date.js"></script>
+						<script src="js/mobiscroll.js"></script> 
+						<script type="text/javascript">
+						$(function () {
+							var currYear = (new Date()).getFullYear();	
+							var opt={};
+							opt.date = {preset : 'date'};
+							opt.datetime = {preset : 'datetime'};
+							opt.time = {preset : 'time'};
+							opt.default = {
+								theme: 'android-ics light', //皮肤样式
+								display: 'modal', //显示方式 
+								mode: 'scroller', //日期选择模式
+								dateFormat: 'yyyy-mm-dd',
+								lang: 'zh',
+								showNow: true,
+								nowText: "今天",
+								startYear: currYear - 50, //开始年份
+								endYear: currYear + 10 //结束年份
+							};
+							$("#form-date").mobiscroll($.extend(opt['date'], opt['default']));
+						});
+						</script>
+						
 						<div class="form-row">
 							<div class="form-col">&nbsp;</div>
 						</div>
 						<div class="form-row">
 							<div class="form-col w-20">&nbsp;</div>
 							<div class="form-col w-80">
-								<input class="form-btn form-submit w-40 bg-orange bd-orange" type="submit" value="立即提交订单" name="dosubmit" />
+								<input class="form-btn form-submit w-40 bg-green bd-green" type="submit" value="立即提交订单" />
+								<input class="form-btn form-reset w-20" type="reset" value="重置" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -136,44 +240,11 @@
 				</div>
 			</div>
 			<div class="order-comment">
-				<h4>发货通知</h4>
-				<div class="comment-list" id="comment-list">
-					<ul>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的 <span class="fg-green">1</span> 已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-						<li>
-							<p>广西的陈** [1599955555]</p>
-							<p>您订购的<span>1</span>已发货！</p>
-						</li>
-					</ul>
-				</div>
+				<h4><i class="iconfont">&#xe601;</i> 发货通知</h4>
+				<div class="comment-list" id="comment-list"></div>
 				<script>
+					//产品容器id，发货容器id
+					replacePro("subject","comment-list");
 					//滚动  容器id，毫秒数
 					scrollComment("comment-list");
 				</script>

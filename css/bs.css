@@ -1,4 +1,23 @@
 @charset "utf-8";
+@font-face {font-family: "iconfont";
+  src: url('../fonts/iconfont.eot?t=1474871562'); /* IE9*/
+  src: url('../fonts/iconfont.eot?t=1474871562#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.woff?t=1474871562') format('woff'), /* chrome, firefox */
+  url('../fonts/iconfont.ttf?t=1474871562') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg?t=1474871562#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:inherit;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-gouwuche:before { content: "\e600"; }
+.icon-fahuo:before { content: "\e601"; }
+.icon-zhifubao:before { content: "\e602"; }
+.icon-weixinzhifu:before { content: "\e603"; }
 html {
 	font-size: 312.5%;
 	min-width: 6.4rem;
@@ -130,13 +149,14 @@ html {
 	}
 	.form-row .form-col .form-control{
 		width:96%;
+		margin-top: -3px;
 	}
 	.form-row .form-col .font-mark{
 		display: inline-block;
-		height:28px;
 		line-height: 28px;
 		font-size:16px;
 		padding:0 3px;
+		margin-top: -3px;
 	}
 	.form-row .form-control:focus{
 		box-shadow:0px 0 3px #44cef6;
@@ -196,20 +216,28 @@ html {
 		left:-1px;
 	}
 	.form-wrap .form-tab label{
-		height: 30px;
+		display:inline-block;
+		float: left;
 		line-height: 28px;
-		display: inline-block;
 		padding:0 5px;
+		margin-top: 4px;
 		margin-right: 5px;
+		margin-bottom: 3px;
 		border: 1px solid #CCC;
 		border-radius: 5px;
 		font-size: 16px;
 		cursor: pointer;
-		vertical-align: middle;
+		background-color: #F8F8F8;
+		color: #44453F;
 	}
-	.form-wrap .form-tab label img.recommend{
+	.form-wrap .form-tab label i.recommend{
+		display:inline-block;
+		width: 25px;
+		height:16px;
 		margin-top:-11px;
 		margin-right:-3px;
+		background-image: url(../images/hot.gif);
+		
 	}
 	.form-wrap .form-tab label.active{
 		border-color: #C32136;
@@ -225,14 +253,40 @@ html {
 		webkit-transition:all 1s ease 0s;
 		-o-transition: all 1s ease 0s;
 	}
+	/*form-tab的其他颜色样式*/
+	.form-wrap .form-tab.blue label.active{
+		border-color: #00A1CB;
+		background-color: #00A1CB;
+	}
+	.form-wrap .form-tab.blue label:hover{
+		border-color: #00A1CB;
+		background-color: #00A1CB;
+	}
+	.form-wrap .form-tab.green label.active{
+		border-color: #60A917;
+		background-color: #60A917;
+	}
+	.form-wrap .form-tab.green label:hover{
+		border-color: #60A917;
+		background-color: #60A917;
+	}
+	.form-wrap .form-tab.orange label.active{
+		border-color: #E56C19;
+		background-color: #E56C19;
+	}
+	.form-wrap .form-tab.orange label:hover{
+		border-color: #E56C19;
+		background-color: #E56C19;
+	}
+	
 	.form-wrap .form-tab input[type="radio"]{
 		display: none;
 	}
-	.form-wrap .form-textarea{
+	.form-row .form-col .form-textarea{
 		margin-top: 5px;
+		margin-bottom: 5px;
 		height: 84px;
 	}
-	
 	.form-reduce, .form-number, .form-plus{
 		text-align: center;
 	}
@@ -247,10 +301,12 @@ html {
 		border-bottom-left-radius: 0;
 		width:30px;
 		cursor: pointer;
+		margin-left:-5px;
 	}
 	.form-row .form-col .form-number{
 		border-radius: 0;
 		width:60px;
+		margin-left:-5px;
 	}
 	.form-row .form-col .form-price{
 		text-align: center;
@@ -263,8 +319,9 @@ html {
 		width: 100%;
 		text-align: center;
 		height: 36px;
+		line-height: 36px;
 		overflow: hidden;
-		font-size:100%;
+		font-size: 16px;
 	}
 	.pages-wrap a{
 		color: #333;
@@ -274,7 +331,6 @@ html {
 		padding:0 8px;
 		border-radius: 3px;
 		border:1px solid #ccc;
-		font-size:16px;
 		text-decoration: none;
 		cursor: pointer;
 	}
@@ -292,7 +348,6 @@ html {
 		padding:0 8px;
 		border-radius: 3px;
 		border:1px solid #177cb0;
-		font-size:16px;
 	}
 	
 	/* 浮动导航组件 */
@@ -329,22 +384,26 @@ html {
 		text-align: center;
 		color: #FFFFFF;
 	}
+	
 	.order-comment{
 		width:100%;
 		float: left;
 		outline: 1px solid #00A1CB;
-		height:500px;
 		font-size:13px;
+		max-height: 520px;
+		overflow: hidden;
+	}
+	.order-comment .comment-list{
+		overflow: hidden;
 	}
 	.comment-list ul{
-		overflow: 500px;
+		overflow: hidden;
 	}
 	.comment-list li{
 		padding:15px;
 		border-bottom: 1px dashed #ccc;
 	}
 	.comment-list li p{
-		height:30px;
 		line-height: 30px;
 	}
 }
@@ -355,7 +414,7 @@ html {
 	.order-wrap{
 		font-size:12px;
 		overflow: hidden;
-		outline: 1px solid #00A1CB;
+		border: 1px solid #00A1CB;
 		margin: 0 auto;
 	}
 	.order-wrap h4{
@@ -366,9 +425,14 @@ html {
 		text-indent: 10px;
 		background-color: #00A1CB;
 	}
+	.order-wrap h4 i{
+		font-size:34px;
+		vertical-align: top;
+	}
 	.order-main{
 		width:100%;
 		float: left;
+		overflow: hidden;
 	}
 }
 @media screen and (min-width: 360px) {
@@ -395,6 +459,8 @@ html {
 	}
 	.order-comment{
 		width:40%;
-		height:720px;
+		min-height: 800px;
+		max-height:none;
+		height:800px;
 	}
 }

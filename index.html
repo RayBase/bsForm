@@ -8,112 +8,17 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
 		<meta content="IE=edge" http-equiv="X-UA-Compatible">
-		<!--<script src="//cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
-		<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
 		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.cookie.js"></script>
-		<script src="js/jquery.validate.min.js"></script>
-		<script src="js/jquery.cityselect.js"></script>
-		<script src="js/jedate.min.js"></script>
 		<script src="js/bs.form.js"></script>
 		<link rel="stylesheet" href="css/base.css"/>
 		<link rel="stylesheet" href="css/bs.css" />
-		<link rel="stylesheet" href="css/jedate.css" />
-		<script>
-			$(function(){
-				//id,name,V9获取的带逗号字段
-				addTabs('color','ly[color]','蓝色,酒红色,藏青色,蓝色+酒红色,酒红色+藏青色,蓝色+藏青色');
-				addTabs('size','ly[size]','38,39,40,41,42');
-			})
-		</script>
 	</head>
 	<body>
-		<div class="form-wrap w-100">
-			<form action="http://www.admin03.com" method="post" id="vForm">
-				<div class="form-row">
-					<label class="form-col form-label w-25">颜色：</label>
-					<div class="form-col form-tab w-70" id="color">
-						<!-- 使用addTabs 方法添加 -->
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">尺码：</label>
-					<div class="form-col form-tab w-70" id="size">
-						<!-- 使用addTabs 方法添加 -->
-					</div>
-				</div>
-				
-				<div class="form-row>
-					
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25" for="name"><b>*</b>姓名：</label>
-					<div class="form-col w-70">
-						<input class="form-control bd-green" type="text" id="name" name="ly[name]" placeholder="请输入您的姓名"/>
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25"><b>*</b>电话：</label>
-					<div class="form-col w-70">
-						<input class="form-control bd-darkBlue" type="text" name="ly[phone]" placeholder="请输入您的电话"/>
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">电子邮箱：</label>
-					<div class="form-col w-70">
-						<input class="form-control" type="text" name="ly[email]" placeholder="请输入您的E-mail"/>
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">地区：</label>
-					<div class="form-col w-20">
-						<select class="form-control prov" name="ly[prov]"></select>
-					</div>
-					<div class="form-col w-20">
-						<select class="form-control city" name="ly[city]" disabled="disabled"></select>
-					</div>
-					<div class="form-col w-20">
-						<select class="form-control dist" name="ly[dist]" disabled="disabled"></select>
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">QQ：</label>
-					<div class="form-col w-70">
-						<input class="form-control" type="text" name="ly[qq]" placeholder="请输入您的QQ"/>
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">日期：</label>
-					<div class="form-col w-70">
-						<input class="form-control w-20" id="form-date" type="date" name="ly[date]" readonly="readonly" placeholder="请点击选择日期" />
-					</div>
-				</div>
-				
-				<div class="form-row">
-					<label class="form-col form-label w-25">留言内容：</label>
-					<div class="form-col w-70">
-						<textarea class="form-control form-textarea" name="ly[content]" placeholder="请输入您的留言"></textarea>
-					</div>
-				</div>
-				
-				<div class="form-row">&nbsp;</div>
-				
-				<div class="form-row">
-					<div class="form-col w-20">&nbsp;</div>
-					<input class="form-btn form-submit" type="submit" value="提交留言" name="dosubmit" />
-					<input class="form-btn w-20" type="reset" value="重置" />
-				</div>
-				
-			</form>
-		</div>
-		
+		<!--
+        	作者：himax@qq.com
+        	时间：2016-10-02
+        	描述：分页组件示范
+       -->
 		<div class="pages-wrap">
 			<a class="a1">10条</a>
 			<a class="a1" href="#"> 上一页 </a>
@@ -121,7 +26,11 @@
 			<a href="#">2</a>
 			<a class="a1" href="#"> 下一页 </a>
 		</div>
-		
+		<!--
+        	作者：himax@qq.com
+        	时间：2016-10-02
+        	描述：浮动菜单示范 nav-bottom nav-top 自行更改
+        -->
 		<div class="nav-wrap nav-bottom">
 			<div class="nav">
 				<ul>
